@@ -1,4 +1,11 @@
 #SingleInstance
+#NoEnv
+#MaxHotkeysPerInterval 99000000
+#HotkeyInterval 99000000
+#KeyHistory 0
+ListLines Off
+Process, Priority, , A
+
 
 ; Null Movement Script
 ; This updates the A and D keys so that only one is held down at a time
@@ -14,13 +21,13 @@ d_scrip := 0 ; Variable that stores the state of the d key output from the scrip
 	a_held := 1 ; Track the actual state of the keyboard key
 	
 	if (d_scrip){ 
-		Send {Blind}{d up} ; Release the d key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
 		d_scrip := 0
+		Send {Blind}{d up} ; Release the d key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
 	}
 	
 	if (!a_scrip){
-		Send {Blind}{a down} ; Send the a down key
 		a_scrip := 1
+		Send {Blind}{a down} ; Send the a down key
 	}
 	return
 
@@ -28,13 +35,13 @@ d_scrip := 0 ; Variable that stores the state of the d key output from the scrip
 	a_held := 0
 	
 	if (a_scrip){
-		Send {Blind}{a up} ; Send the a up key
 		a_scrip := 0
+		Send {Blind}{a up} ; Send the a up key
 	}
 		
 	if (d_held AND !d_scrip){
-		Send {Blind}{d down} ; Send the d down key if it's held
 		d_scrip := 1
+		Send {Blind}{d down} ; Send the d down key if it's held
 	}
 	return
 
@@ -42,13 +49,13 @@ d_scrip := 0 ; Variable that stores the state of the d key output from the scrip
 	d_held := 1
 	
 	if (a_scrip){
-		Send {Blind}{a up}
 		a_scrip := 0
+		Send {Blind}{a up}
 	}
 	
 	if (!d_scrip){
-		Send {Blind}{d down}
 		d_scrip := 1
+		Send {Blind}{d down}
 	}
 	return
 
@@ -56,12 +63,12 @@ d_scrip := 0 ; Variable that stores the state of the d key output from the scrip
 	d_held := 0
 	
 	if (d_scrip){
-		Send {Blind}{d up}
 		d_scrip := 0
+		Send {Blind}{d up}
 	}
 	
 	if (a_held AND !a_scrip){
-		Send {Blind}{a down}
 		a_scrip := 1
+		Send {Blind}{a down}
 	}
 	return
