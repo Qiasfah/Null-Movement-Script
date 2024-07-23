@@ -22,18 +22,19 @@ global s_held := 0
 global w_scrip := 0
 global s_scrip := 0
 
-*$a::
+*$a:: ; Every time the a key is pressed, * to include occurences with modifiers (shift, control, alt, etc)
 {   
     global a_held
     global d_held
     global a_scrip
     global d_scrip
+
     a_held := 1  ; Track the actual state of the A key
     
     if d_scrip
     { 
         d_scrip := 0
-        Send "{Blind}{d up}" ; Release the D key if it's held down
+        Send "{Blind}{d up}" ; Release the D key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
     }
     
     if !a_scrip
@@ -43,7 +44,7 @@ global s_scrip := 0
     }
 }
 
-*$a up::
+*$a up:: ; Every time the a key is released
 {    
     global a_held
     global d_held
