@@ -28,14 +28,16 @@ global s_scrip := 0
     global d_scrip
     a_held := 1  ; Track the actual state of the A key
     
-    if d_scrip{ 
+    if d_scrip
+    { 
         d_scrip := 0
-        SendInput "{Blind}{d up}" ; Release the D key if it's held down
+        Send "{Blind}{d up}" ; Release the D key if it's held down
     }
     
-    if (!a_scrip){
+    if !a_scrip
+    {
         a_scrip := 1
-        SendInput "{Blind}{a down}" ; Send the A down key
+        Send "{Blind}{a down}" ; Send the A down key
     }
 }
 
@@ -45,16 +47,19 @@ global s_scrip := 0
     global d_held
     global a_scrip
     global d_scrip
+
     a_held := 0
     
-    if (a_scrip){
+    if a_scrip
+    {
         a_scrip := 0
-        SendInput "{Blind}{a up}"  ; Send the A up key
+        Send "{Blind}{a up}"  ; Send the A up key
     }
         
-    if (d_held && !d_scrip){
+    if d_held && !d_scrip
+    {
         d_scrip := 1
-        SendInput "{Blind}{d down}"  ; Send the D down key if it's held
+        Send "{Blind}{d down}"  ; Send the D down key if it's held
     }
 }
 
@@ -64,16 +69,19 @@ global s_scrip := 0
     global d_held
     global a_scrip
     global d_scrip
+
     d_held := 1
     
-    if (a_scrip){
+    if a_scrip
+    {
         a_scrip := 0
-        SendInput "{Blind}{a up}"  ; Release the A key if it's held down
+        Send "{Blind}{a up}"  ; Release the A key if it's held down
     }
     
-    if (!d_scrip){
+    if !d_scrip
+    {
         d_scrip := 1
-        SendInput "{Blind}{d down}"  ; Send the D down key
+        Send "{Blind}{d down}"  ; Send the D down key
     }
 }
 
@@ -83,16 +91,19 @@ global s_scrip := 0
     global d_held
     global a_scrip
     global d_scrip
+
     d_held := 0
     
-    if (d_scrip){
+    if d_scrip
+    {
         d_scrip := 0
-        SendInput "{Blind}{d up}"  ; Send the D up key
+        Send "{Blind}{d up}"  ; Send the D up key
     }
     
-    if (a_held && !a_scrip){
+    if a_held && !a_scrip
+    {
         a_scrip := 1
-        SendInput "{Blind}{a down}"  ; Send the A down key if it's held
+        Send "{Blind}{a down}"  ; Send the A down key if it's held
     }
 }
 
@@ -102,30 +113,40 @@ global s_scrip := 0
     global w_scrip
     global s_held
     global s_scrip
+
     w_held := 1
-    if s_scrip {
+
+    if s_scrip 
+    {
         s_scrip := 0
-        SendInput "{Blind}{s up}"
+        Send "{Blind}{s up}"
     }
-    if !w_scrip {
+    if !w_scrip 
+    {
         w_scrip := 1
-        SendInput "{Blind}{w down}"
+        Send "{Blind}{w down}"
     }
 }
+
 *$w up::
 {    
     global w_held
     global w_scrip
     global s_held
     global s_scrip
+
     w_held := 0
-    if w_scrip {
+
+    if w_scrip
+    {
         w_scrip := 0
-        SendInput "{Blind}{w up}"
+        Send "{Blind}{w up}"
     }
-    if s_held && !s_scrip {
+
+    if s_held && !s_scrip 
+    {
         s_scrip := 1
-        SendInput "{Blind}{s down}"
+        Send "{Blind}{s down}"
     }
 }
 
@@ -135,14 +156,19 @@ global s_scrip := 0
     global w_scrip
     global s_held
     global s_scrip
+
     s_held := 1
-    if w_scrip {
+
+    if w_scrip 
+    {
         w_scrip := 0
-        SendInput "{Blind}{w up}"
+        Send "{Blind}{w up}"
     }
-    if !s_scrip {
+
+    if !s_scrip 
+    {
         s_scrip := 1
-        SendInput "{Blind}{s down}"
+        Send "{Blind}{s down}"
     }
 }
 
@@ -152,13 +178,17 @@ global s_scrip := 0
     global w_scrip
     global s_held
     global s_scrip
+
     s_held := 0
+
     if s_scrip {
         s_scrip := 0
-        SendInput "{Blind}{s up}"
+        Send "{Blind}{s up}"
     }
-    if (w_held && !w_scrip) {
+
+    if (w_held && !w_scrip) 
+    {
         w_scrip := 1
-        SendInput "{Blind}{w down}"
+        Send "{Blind}{w down}"
     }
 }
