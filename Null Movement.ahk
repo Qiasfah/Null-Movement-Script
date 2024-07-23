@@ -1,72 +1,164 @@
-#SingleInstance force
-#NoEnv
-#MaxHotkeysPerInterval 99000000
-#HotkeyInterval 99000000
-#KeyHistory 0
-ListLines Off
-
 ; Null Movement Script for AutoHotkey v2
 ; This script updates the A and D keys so that only one is held down at a time
 ; This avoids the situation where game engines treat holding both strafe keys as not moving
 ; Instead, holding both strafe keys will cause you to move in the direction of the last one that was pressed
 
-a_held := 0  ; Variable that stores the actual keyboard state of the A key
-d_held := 0  ; Variable that stores the actual keyboard state of the D key
-a_scrip := 0 ; Variable that stores the state of the A key output from the script
-d_scrip := 0 ; Variable that stores the state of the D key output from the script
+#SingleInstance force
+Persistent true
+ListLines False
+KeyHistory 0
+ProcessSetPriority "High"
+A_MaxHotkeysPerInterval := 99000000
+A_HotkeyInterval := 0
+
+global a_held := 0  ; Variable that stores the actual keyboard state of the A key
+global d_held := 0  ; Variable that stores the actual keyboard state of the D key
+global a_scrip := 0 ; Variable that stores the state of the A key output from the script
+global d_scrip := 0 ; Variable that stores the state of the D key output from the script
+global w_held := 0
+global w_scrip := 0
+global s_held := 0
+global s_scrip := 0
 
 *$a::
+{   
+    global a_held
+    global d_held
+    global a_scrip
+    global d_scrip
     a_held := 1  ; Track the actual state of the A key
     
-    if (d_scrip){ 
+    if d_scrip{ 
         d_scrip := 0
-        SendInput {Blind}{d up}  ; Release the D key if it's held down
+        SendInput "{Blind}{d up}" ; Release the D key if it's held down
     }
     
     if (!a_scrip){
         a_scrip := 1
-        SendInput {Blind}{a down}  ; Send the A down key
+        SendInput "{Blind}{a down}" ; Send the A down key
     }
-return
+}
 
 *$a up::
+{    
+    global a_held
+    global d_held
+    global a_scrip
+    global d_scrip
     a_held := 0
     
     if (a_scrip){
         a_scrip := 0
-        SendInput {Blind}{a up}  ; Send the A up key
+        SendInput "{Blind}{a up}"  ; Send the A up key
     }
         
     if (d_held && !d_scrip){
         d_scrip := 1
-        SendInput {Blind}{d down}  ; Send the D down key if it's held
+        SendInput "{Blind}{d down}"  ; Send the D down key if it's held
     }
-return
+}
 
 *$d::
+{    
+    global a_held
+    global d_held
+    global a_scrip
+    global d_scrip
     d_held := 1
     
     if (a_scrip){
         a_scrip := 0
-        SendInput {Blind}{a up}  ; Release the A key if it's held down
+        SendInput "{Blind}{a up}"  ; Release the A key if it's held down
     }
     
     if (!d_scrip){
         d_scrip := 1
-        SendInput {Blind}{d down}  ; Send the D down key
+        SendInput "{Blind}{d down}"  ; Send the D down key
     }
-return
+}
 
 *$d up::
+{    
+    global a_held
+    global d_held
+    global a_scrip
+    global d_scrip
     d_held := 0
     
     if (d_scrip){
         d_scrip := 0
-        SendInput {Blind}{d up}  ; Send the D up key
+        SendInput "{Blind}{d up}"  ; Send the D up key
     }
     
     if (a_held && !a_scrip){
         a_scrip := 1
-        SendInput {Blind}{a down}  ; Send the A down key if it's held
+        SendInput "{Blind}{a down}"  ; Send the A down key if it's held
     }
-return
+}
+
+*$w::
+{    
+    global w_held
+    global w_scrip
+    global s_held
+    global s_scrip
+    w_held := 1
+    if s_scrip {
+        s_scrip := 0
+        SendInput "{Blind}{s up}"
+    }
+    if !w_scrip {
+        w_scrip := 1
+        SendInput "{Blind}{w down}"
+    }
+}
+*$w up::
+{    
+    global w_held
+    global w_scrip
+    global s_held
+    global s_scrip
+    w_held := 0
+    if w_scrip {
+        w_scrip := 0
+        SendInput "{Blind}{w up}"
+    }
+    if s_held && !s_scrip {
+        s_scrip := 1
+        SendInput "{Blind}{s down}"
+    }
+}
+
+*$s::
+{    
+    global w_held
+    global w_scrip
+    global s_held
+    global s_scrip
+    s_held := 1
+    if w_scrip {
+        w_scrip := 0
+        SendInput "{Blind}{w up}"
+    }
+    if !s_scrip {
+        s_scrip := 1
+        SendInput "{Blind}{s down}"
+    }
+}
+
+*$s up::
+{    
+    global w_held
+    global w_scrip
+    global s_held
+    global s_scrip
+    s_held := 0
+    if s_scrip {
+        s_scrip := 0
+        SendInput "{Blind}{s up}"
+    }
+    if (w_held && !w_scrip) {
+        w_scrip := 1
+        SendInput "{Blind}{w down}"
+    }
+}
