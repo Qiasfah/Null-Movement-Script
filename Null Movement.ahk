@@ -181,12 +181,13 @@ global s_scrip := 0
 
     s_held := 0
 
-    if s_scrip {
+    if s_scrip 
+    {
         s_scrip := 0
         Send "{Blind}{s up}"
     }
 
-    if (w_held && !w_scrip) 
+    if w_held && !w_scrip 
     {
         w_scrip := 1
         Send "{Blind}{w down}"
