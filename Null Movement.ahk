@@ -2,6 +2,7 @@
 ; This script updates the A and D keys so that only one is held down at a time
 ; This avoids the situation where game engines treat holding both strafe keys as not moving
 ; Instead, holding both strafe keys will cause you to move in the direction of the last one that was pressed
+; The same logic is applied to the W and S keys (only one can be held at a time)
 
 #SingleInstance force
 Persistent true
@@ -15,9 +16,10 @@ global a_held := 0  ; Variable that stores the actual keyboard state of the A ke
 global d_held := 0  ; Variable that stores the actual keyboard state of the D key
 global a_scrip := 0 ; Variable that stores the state of the A key output from the script
 global d_scrip := 0 ; Variable that stores the state of the D key output from the script
+
 global w_held := 0
-global w_scrip := 0
 global s_held := 0
+global w_scrip := 0
 global s_scrip := 0
 
 *$a::
@@ -110,8 +112,8 @@ global s_scrip := 0
 *$w::
 {    
     global w_held
-    global w_scrip
     global s_held
+    global w_scrip
     global s_scrip
 
     w_held := 1
@@ -131,8 +133,8 @@ global s_scrip := 0
 *$w up::
 {    
     global w_held
-    global w_scrip
     global s_held
+    global w_scrip
     global s_scrip
 
     w_held := 0
@@ -153,8 +155,8 @@ global s_scrip := 0
 *$s::
 {    
     global w_held
-    global w_scrip
     global s_held
+    global w_scrip
     global s_scrip
 
     s_held := 1
@@ -175,8 +177,8 @@ global s_scrip := 0
 *$s up::
 {    
     global w_held
-    global w_scrip
     global s_held
+    global w_scrip
     global s_scrip
 
     s_held := 0
