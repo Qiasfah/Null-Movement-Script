@@ -5,6 +5,7 @@
 ; The same logic is applied to the W and S keys (only one can be held at a time)
 ; Cheers to https://www.youtube.com/watch?v=Feny5bs2JCg&t=335s for mentioning this
 ; Changelog:
+; 2024-07-25: Adding section to allow for end button to close script, leaving commented for the moment
 ; 2024-07-25: Changed to use scancodes for multi-layout keyboard support
 ; 2024-07-25: Added requires v2 line
 
@@ -32,6 +33,20 @@ global w_held := 0
 global s_held := 0
 global w_scrip := 0
 global s_scrip := 0
+
+/* Un-comment this section if you want the end button to open a dialog that asks to close the script
+ToolTip "Script Enabled",A_ScreenWidth/2,A_ScreenHeight/2
+SetTimer () => ToolTip(), -1000
+
+End:: ; <--- this button exits the script
+{ 
+    Result := MsgBox("Are you sure you want to exit?",, 4)
+    if Result = "Yes" 
+    {
+        ExitApp
+    }
+}
+*/
 
 *$SC01E:: ; *$a:: ; Every time the a key is pressed, * to include occurences with modifiers (shift, control, alt, etc)
 {   
