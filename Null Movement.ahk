@@ -5,7 +5,14 @@
 ; The same logic is applied to the W and S keys (only one can be held at a time)
 ; Cheers to https://www.youtube.com/watch?v=Feny5bs2JCg&t=335s for mentioning this
 ; Changelog:
+; 2024-07-25: Changed to use scancodes for multi-layout keyboard support
 ; 2024-07-25: Added requires v2 line
+
+; Scan Code Mappings:
+; W   SC011
+; A   SC01E
+; S   SC01F
+; D   SC020
 
 #Requires AutoHotkey v2
 #SingleInstance force
@@ -26,7 +33,7 @@ global s_held := 0
 global w_scrip := 0
 global s_scrip := 0
 
-*$a:: ; Every time the a key is pressed, * to include occurences with modifiers (shift, control, alt, etc)
+*$SC01E:: ; *$a:: ; Every time the a key is pressed, * to include occurences with modifiers (shift, control, alt, etc)
 {   
     global a_held
     global d_held
@@ -38,17 +45,17 @@ global s_scrip := 0
     if d_scrip
     { 
         d_scrip := 0
-        Send "{Blind}{d up}" ; Release the D key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
+        Send "{Blind}{SC020 up}" ; Release the D key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
     }
     
     if !a_scrip
     {
         a_scrip := 1
-        Send "{Blind}{a down}" ; Send the A down key
+        Send "{Blind}{SC01E down}" ; Send the A down key
     }
 }
 
-*$a up:: ; Every time the a key is released
+*$SC01E up:: ; *$a up:: ; Every time the a key is released
 {    
     global a_held
     global d_held
@@ -60,17 +67,17 @@ global s_scrip := 0
     if a_scrip
     {
         a_scrip := 0
-        Send "{Blind}{a up}"  ; Send the A up key
+        Send "{Blind}{SC01E up}"  ; Send the A up key
     }
         
     if d_held && !d_scrip
     {
         d_scrip := 1
-        Send "{Blind}{d down}"  ; Send the D down key if it's held
+        Send "{Blind}{SC020 down}"  ; Send the D down key if it's held
     }
 }
 
-*$d::
+*$SC020:: ; *$d::
 {    
     global a_held
     global d_held
@@ -82,17 +89,17 @@ global s_scrip := 0
     if a_scrip
     {
         a_scrip := 0
-        Send "{Blind}{a up}"  ; Release the A key if it's held down
+        Send "{Blind}{SC01E up}"  ; Release the A key if it's held down
     }
     
     if !d_scrip
     {
         d_scrip := 1
-        Send "{Blind}{d down}"  ; Send the D down key
+        Send "{Blind}{SC020 down}"  ; Send the D down key
     }
 }
 
-*$d up::
+*$SC020 up:: ; *$d up::
 {    
     global a_held
     global d_held
@@ -104,17 +111,17 @@ global s_scrip := 0
     if d_scrip
     {
         d_scrip := 0
-        Send "{Blind}{d up}"  ; Send the D up key
+        Send "{Blind}{SC020 up}"  ; Send the D up key
     }
     
     if a_held && !a_scrip
     {
         a_scrip := 1
-        Send "{Blind}{a down}"  ; Send the A down key if it's held
+        Send "{Blind}{SC01E down}"  ; Send the A down key if it's held
     }
 }
 
-*$w::
+*$SC011:: ; *$w::
 {    
     global w_held
     global s_held
@@ -126,16 +133,16 @@ global s_scrip := 0
     if s_scrip 
     {
         s_scrip := 0
-        Send "{Blind}{s up}"
+        Send "{Blind}{SC01F up}"
     }
     if !w_scrip 
     {
         w_scrip := 1
-        Send "{Blind}{w down}"
+        Send "{Blind}{SC011 down}"
     }
 }
 
-*$w up::
+*$SC011 up:: ; *$w up::
 {    
     global w_held
     global s_held
@@ -147,17 +154,17 @@ global s_scrip := 0
     if w_scrip
     {
         w_scrip := 0
-        Send "{Blind}{w up}"
+        Send "{Blind}{SC011 up}"
     }
 
     if s_held && !s_scrip 
     {
         s_scrip := 1
-        Send "{Blind}{s down}"
+        Send "{Blind}{SC01F down}"
     }
 }
 
-*$s::
+*$SC01F:: ; *$s::
 {    
     global w_held
     global s_held
@@ -169,17 +176,17 @@ global s_scrip := 0
     if w_scrip 
     {
         w_scrip := 0
-        Send "{Blind}{w up}"
+        Send "{Blind}{SC011 up}"
     }
 
     if !s_scrip 
     {
         s_scrip := 1
-        Send "{Blind}{s down}"
+        Send "{Blind}{SC01F down}"
     }
 }
 
-*$s up::
+*$SC01F up:: ; *$s up::
 {    
     global w_held
     global s_held
@@ -191,12 +198,12 @@ global s_scrip := 0
     if s_scrip 
     {
         s_scrip := 0
-        Send "{Blind}{s up}"
+        Send "{Blind}{SC01F up}"
     }
 
     if w_held && !w_scrip 
     {
         w_scrip := 1
-        Send "{Blind}{w down}"
+        Send "{Blind}{SC011 down}"
     }
 }
