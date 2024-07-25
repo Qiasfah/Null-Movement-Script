@@ -4,7 +4,10 @@
 ; Instead, holding both strafe keys will cause you to move in the direction of the last one that was pressed
 ; The same logic is applied to the W and S keys (only one can be held at a time)
 ; Cheers to https://www.youtube.com/watch?v=Feny5bs2JCg&t=335s for mentioning this
+; Changelog:
+; 2024-07-25: Added requires v2 line
 
+#Requires AutoHotkey v2
 #SingleInstance force
 Persistent true
 ListLines False
