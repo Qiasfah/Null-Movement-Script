@@ -5,6 +5,7 @@
 ; The same logic is applied to the W and S keys (only one can be held at a time)
 ; Cheers to https://www.youtube.com/watch?v=Feny5bs2JCg&t=335s for mentioning this
 ; Changelog:
+; 2024-07-26: Changing to use SendInput instead of Send, removing a couple if statements in key down events
 ; 2024-07-25: Adding section to allow for end button to close script, leaving commented for the moment
 ; 2024-07-25: Changed to use scancodes for multi-layout keyboard support
 ; 2024-07-25: Added requires v2 line
@@ -60,14 +61,11 @@ End:: ; <--- this button exits the script
     if d_scrip
     { 
         d_scrip := 0
-        Send "{Blind}{SC020 up}" ; Release the D key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
+        SendInput "{Blind}{SC020 up}" ; Release the D key if it's held down, {Blind} so it includes any key modifiers (shift primarily)
     }
     
-    if !a_scrip
-    {
-        a_scrip := 1
-        Send "{Blind}{SC01E down}" ; Send the A down key
-    }
+    a_scrip := 1
+    SendInput "{Blind}{SC01E down}" ; A down key
 }
 
 *$SC01E up:: ; *$a up:: ; Every time the a key is released
@@ -82,13 +80,13 @@ End:: ; <--- this button exits the script
     if a_scrip
     {
         a_scrip := 0
-        Send "{Blind}{SC01E up}"  ; Send the A up key
+        SendInput "{Blind}{SC01E up}"  ; A up key
     }
         
     if d_held && !d_scrip
     {
         d_scrip := 1
-        Send "{Blind}{SC020 down}"  ; Send the D down key if it's held
+        SendInput "{Blind}{SC020 down}"  ; D down key if it's held
     }
 }
 
@@ -104,14 +102,11 @@ End:: ; <--- this button exits the script
     if a_scrip
     {
         a_scrip := 0
-        Send "{Blind}{SC01E up}"  ; Release the A key if it's held down
+        SendInput "{Blind}{SC01E up}"  ; Release the A key if it's held down
     }
     
-    if !d_scrip
-    {
-        d_scrip := 1
-        Send "{Blind}{SC020 down}"  ; Send the D down key
-    }
+    d_scrip := 1
+    SendInput "{Blind}{SC020 down}"  ; D down key
 }
 
 *$SC020 up:: ; *$d up::
@@ -126,13 +121,13 @@ End:: ; <--- this button exits the script
     if d_scrip
     {
         d_scrip := 0
-        Send "{Blind}{SC020 up}"  ; Send the D up key
+        SendInput "{Blind}{SC020 up}"  ; D up key
     }
     
     if a_held && !a_scrip
     {
         a_scrip := 1
-        Send "{Blind}{SC01E down}"  ; Send the A down key if it's held
+        SendInput "{Blind}{SC01E down}"  ; A down key if it's held
     }
 }
 
@@ -148,13 +143,11 @@ End:: ; <--- this button exits the script
     if s_scrip 
     {
         s_scrip := 0
-        Send "{Blind}{SC01F up}"
+        SendInput "{Blind}{SC01F up}"
     }
-    if !w_scrip 
-    {
-        w_scrip := 1
-        Send "{Blind}{SC011 down}"
-    }
+
+    w_scrip := 1
+    SendInput "{Blind}{SC011 down}"
 }
 
 *$SC011 up:: ; *$w up::
@@ -169,13 +162,13 @@ End:: ; <--- this button exits the script
     if w_scrip
     {
         w_scrip := 0
-        Send "{Blind}{SC011 up}"
+        SendInput "{Blind}{SC011 up}"
     }
 
     if s_held && !s_scrip 
     {
         s_scrip := 1
-        Send "{Blind}{SC01F down}"
+        SendInput "{Blind}{SC01F down}"
     }
 }
 
@@ -191,14 +184,11 @@ End:: ; <--- this button exits the script
     if w_scrip 
     {
         w_scrip := 0
-        Send "{Blind}{SC011 up}"
+        SendInput "{Blind}{SC011 up}"
     }
 
-    if !s_scrip 
-    {
-        s_scrip := 1
-        Send "{Blind}{SC01F down}"
-    }
+    s_scrip := 1
+    SendInput "{Blind}{SC01F down}"
 }
 
 *$SC01F up:: ; *$s up::
@@ -213,12 +203,12 @@ End:: ; <--- this button exits the script
     if s_scrip 
     {
         s_scrip := 0
-        Send "{Blind}{SC01F up}"
+        SendInput "{Blind}{SC01F up}"
     }
 
     if w_held && !w_scrip 
     {
         w_scrip := 1
-        Send "{Blind}{SC011 down}"
+        SendInput "{Blind}{SC011 down}"
     }
 }
