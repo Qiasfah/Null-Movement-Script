@@ -5,6 +5,7 @@
 ; The same logic is applied to the W and S keys (only one can be held at a time)
 ; Cheers to https://www.youtube.com/watch?v=Feny5bs2JCg&t=335s for mentioning this
 ; Changelog:
+; 2024-08-10: simpler global usage with single global specifier
 ; 2024-07-26: Adding MaxThreads 1 and MaxThreadsBuffer 1
 ; 2024-07-26: Changing to use SendInput instead of Send, removing a couple if statements in key down events
 ; 2024-07-25: Adding section to allow for end button to close script, leaving commented for the moment
