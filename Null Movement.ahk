@@ -54,10 +54,7 @@ End:: ; <--- this button exits the script
 
 *$SC01E:: ; *$a:: ; Every time the a key is pressed, * to include occurences with modifiers (shift, control, alt, etc)
 {   
-    global a_held
-    global d_held
-    global a_scrip
-    global d_scrip
+    global
 
     a_held := 1  ; Track the actual state of the A key
     
@@ -73,10 +70,7 @@ End:: ; <--- this button exits the script
 
 *$SC01E up:: ; *$a up:: ; Every time the a key is released
 {    
-    global a_held
-    global d_held
-    global a_scrip
-    global d_scrip
+    global
 
     a_held := 0
     
@@ -95,10 +89,7 @@ End:: ; <--- this button exits the script
 
 *$SC020:: ; *$d::
 {    
-    global a_held
-    global d_held
-    global a_scrip
-    global d_scrip
+    global
 
     d_held := 1
     
@@ -114,10 +105,7 @@ End:: ; <--- this button exits the script
 
 *$SC020 up:: ; *$d up::
 {    
-    global a_held
-    global d_held
-    global a_scrip
-    global d_scrip
+    global
 
     d_held := 0
     
@@ -136,10 +124,7 @@ End:: ; <--- this button exits the script
 
 *$SC011:: ; *$w::
 {    
-    global w_held
-    global s_held
-    global w_scrip
-    global s_scrip
+    global
 
     w_held := 1
 
@@ -155,10 +140,7 @@ End:: ; <--- this button exits the script
 
 *$SC011 up:: ; *$w up::
 {    
-    global w_held
-    global s_held
-    global w_scrip
-    global s_scrip
+    global
 
     w_held := 0
 
@@ -177,10 +159,7 @@ End:: ; <--- this button exits the script
 
 *$SC01F:: ; *$s::
 {    
-    global w_held
-    global s_held
-    global w_scrip
-    global s_scrip
+    global
 
     s_held := 1
 
@@ -196,10 +175,7 @@ End:: ; <--- this button exits the script
 
 *$SC01F up:: ; *$s up::
 {    
-    global w_held
-    global s_held
-    global w_scrip
-    global s_scrip
+    global
 
     s_held := 0
 
